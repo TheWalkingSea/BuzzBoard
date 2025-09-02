@@ -1,0 +1,35 @@
+.weather {
+    width: 190px;
+}
+
+.weather > img:first-child {
+    float: left;
+}
+
+.subtext {
+    color: #8997AC;
+    font-size: 20px;
+}
+
+.temperature {
+    font-weight: bold;
+    font-size: 35px;
+    color: #FFFFFF;
+}
+
+
+/* Raindrop and Wind  */
+.weatherStats, .weatherStats div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+.weatherStats {
+    gap: 10px;
+}
+
+.weatherInfo > p {
+    text-align: right;
+}
