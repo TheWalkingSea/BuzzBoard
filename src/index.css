@@ -1,3 +1,7 @@
+@font-face {
+  font-family: Roboto;
+  src: url("/fonts/Roboto.ttf");
+}
 :root {
   font-family: Roboto, Arial, sans-serif;
 }
@@ -17,4 +21,31 @@
   grid-template-columns: repeat(12, 1fr);
   gap: 20px;
   padding: 20px;
+
+  grid-auto-rows: min-content;
+}
+
+section {
+  background-color: #1F2937;
+  padding: 20px;
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.containerHeading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 10px;
+}
+
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
 }
