@@ -1,5 +1,7 @@
 import './App.css'
 import Weather from './Weather'
+import QuoteOfTheDay from './QuoteOfTheDay'
+import Clock from './Clock'
 
 function App() {
 
@@ -13,7 +15,12 @@ function App() {
 
         <Weather />
         
+      
       </header>
+
+      <QuoteOfTheDay quote="There is no passion to be found playing small - in settling for a life that is less than the one you are capable of living.\n- Nelson Mandela"/>
+      <Clock />
+
     </>
   )
 }
