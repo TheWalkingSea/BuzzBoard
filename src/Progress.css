@@ -1,0 +1,8 @@
+.progress {
+    grid-column: 1 / 6;
+}
+
+.progress-circle {
+    width: 203px;
+    background: conic-gradient(red 0% 0%, lightgray 0% 100%);
+}
