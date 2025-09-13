@@ -3,6 +3,7 @@ import Weather from './Components/Weather'
 import QuoteOfTheDay from './Components/QuoteOfTheDay'
 import Clock from './Components/Clock'
 import Progress from './Components/Progress'
+import Assignments from './Components/Assignments'
 
 function App() {
 
@@ -23,6 +24,8 @@ function App() {
       <Clock />
 
       <Progress />
+
+      <Assignments />
 
     </>
   )

@@ -1,0 +1,21 @@
+.assignments {
+    grid-column: 6 / -1;
+}
+
+.assignmentContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 22px;
+}
+
+.assignment {
+    display: flex;
+    flex-direction: column;
+    background-color: #39465B;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.name {
+    font-weight: bold;
+}
