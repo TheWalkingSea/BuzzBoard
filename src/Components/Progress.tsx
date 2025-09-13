@@ -23,7 +23,7 @@ export default function Progress () {
             console.log(`Sleeping until next percentage update for ${Math.floor(next_percent_update / 1000 / 60 / 60)} hours and ${Math.floor(next_percent_update / 1000 / 60)} seconds.`);
             const current_percentage = dates.get_percentage();
             timeout = setTimeout(() => {
-                setPercentage(current_percentage + 1);
+                setPercentage(current_percentage + 0.01);
             }, next_percent_update);
         }
 
