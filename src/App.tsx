@@ -5,6 +5,7 @@ import Clock from './Components/Clock'
 import Progress from './Components/Progress'
 import Assignments from './Components/Assignments'
 import MealPlan from './Components/MealPlan'
+import Schedule from './Components/Schedule'
 
 function App() {
 
@@ -30,6 +31,8 @@ function App() {
       </div>
 
       <Assignments />
+
+      <Schedule />
 
     </>
   )
