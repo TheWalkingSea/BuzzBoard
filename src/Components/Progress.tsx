@@ -41,7 +41,7 @@ export default function Progress () {
             <div className="progress-circle">
                 <div className="outer">
                     <div className="inner">
-                        <span className="percentage">{Math.floor(100 * percentage)}%</span>
+                        <span className="percent">{Math.floor(100 * percentage)}%</span>
                     </div>
                 </div>
                 <svg
