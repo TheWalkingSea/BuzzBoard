@@ -11,11 +11,8 @@ export default function Progress () {
             </div>
 
             <div className="progress-circle">
-                <div className="inner-circle"></div>
                 <span className="percentage">70%</span>
-            </div>
         </section>
-        
         </>
     )
 }
