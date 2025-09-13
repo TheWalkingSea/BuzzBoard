@@ -57,16 +57,17 @@ export default function Notifications() {
 
             <div className="notificationContainer">
                 {notifications.map((notification) => (
-                    <>
-                        <div className="notification">
-                            <img src={ICON_MAPPING[notification.type]} alt={notification.type} width="40" />
+                    <div className="notification">
+                        <div className="notificationBanner">
+                            <img src={ICON_MAPPING[notification.type]} alt={notification.type} width="25" />
                             <div className="name">{notification.name}</div>
+                            <div className="time">{notification.time}</div>
                         </div>
                         <div className="notificationInfo">
-                            <div>{notification.description}</div>
-                            <div>{notification.time}</div>
+                            {notification.description}
                         </div>
-                    </>
+                    </div>
+
                 ))}
             </div>
         </section>

@@ -1,3 +1,35 @@
 section {
-    grid-column: 8 / -1;   
+    grid-column: 8 / -1;
+}
+
+.notificationContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.notification {
+    background-color: #2F3E56;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.notificationBanner {
+
+    display: flex;
+    align-items: center;
+}
+
+.notification .name {
+    padding-left: 10px;
+    font-weight: bold;
+}
+
+.notificationInfo, .notificationBanner .time {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.notificationBanner .time {
+    margin-left: auto;
+    padding-right: 5px;
 }
