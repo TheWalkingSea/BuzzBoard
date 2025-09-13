@@ -31,14 +31,18 @@ export function get_percentage(): number {
     return (Date.now() - SEMESTER_START) / (SEMESTER_LENGTH)
 }
 
-export function get_relative_timestamp(timestamp: Date): string {
+export function get_relative_timestamp(timestamp: number): string {
+    return get_relative_date(new Date(timestamp));
+}
+
+export function get_relative_date(date: Date): string {
     const now = new Date();
 
-    const delta_y = now.getFullYear() - timestamp.getFullYear();
-    const delta_m = now.getMonth() - timestamp.getMonth();
-    const delta_d = now.getDate() - timestamp.getDate();
-    const delta_h = now.getHours() - timestamp.getHours();
-    const delta_s = now.getSeconds() - timestamp.getSeconds();
+    const delta_y = now.getFullYear() - date.getFullYear();
+    const delta_m = now.getMonth() - date.getMonth();
+    const delta_d = now.getDate() - date.getDate();
+    const delta_h = now.getHours() - date.getHours();
+    const delta_s = now.getSeconds() - date.getSeconds();
     if (delta_y > 0) {
         return `${delta_y} year${delta_y > 1 && 's'} ago`
     } else if (delta_m > 0) {
