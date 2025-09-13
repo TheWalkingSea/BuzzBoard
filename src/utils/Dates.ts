@@ -30,3 +30,26 @@ export function get_days_remaining(): number {
 export function get_percentage(): number {
     return (Date.now() - SEMESTER_START) / (SEMESTER_LENGTH)
 }
+
+export function get_relative_timestamp(timestamp: Date): string {
+    const now = new Date();
+
+    const delta_y = now.getFullYear() - timestamp.getFullYear();
+    const delta_m = now.getMonth() - timestamp.getMonth();
+    const delta_d = now.getDate() - timestamp.getDate();
+    const delta_h = now.getHours() - timestamp.getHours();
+    const delta_s = now.getSeconds() - timestamp.getSeconds();
+    if (delta_y > 0) {
+        return `${delta_y} year${delta_y > 1 && 's'} ago`
+    } else if (delta_m > 0) {
+        return `${delta_m} month${delta_m > 1 && 's'} ago`
+    } else if (delta_d > 0) {
+        return `${delta_d} day${delta_d > 1 && 's'} ago`
+    } else if (delta_h > 0) {
+        return `${delta_h} hour${delta_h > 1 && 's'} ago`
+    } else if (delta_s >= 0) {
+        return `${delta_s} second${delta_s > 1 && 's'} ago`
+    }
+
+    return 'Invalid Timestamp';
+}
