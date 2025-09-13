@@ -1,5 +1,5 @@
 import './Notifications.css';
-
+import { get_relative_timestamp } from '../utils/Dates.ts';
 
 const ICON_MAPPING = {
     email: 'images/envelope-regular-full.svg'
@@ -61,7 +61,7 @@ export default function Notifications() {
                         <div className="notificationBanner">
                             <img src={ICON_MAPPING[notification.type]} alt={notification.type} width="25" />
                             <div className="name">{notification.name}</div>
-                            <div className="time">{notification.time}</div>
+                            <div className="time">{get_relative_timestamp(notification.time)}</div>
                         </div>
                         <div className="notificationInfo">
                             {notification.description}
