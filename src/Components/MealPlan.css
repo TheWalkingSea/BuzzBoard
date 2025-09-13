@@ -1,0 +1,40 @@
+/* Percentage Bar */
+
+.percentageContainer {
+    width: 100%;
+    background-color: #293849;
+    border-radius: 26px;
+    height: 13px;
+    position: relative;
+}
+
+.percentage {
+    background-color: #80BDE6;
+    border-radius: 26px;
+    height: 13px;
+    position: absolute;
+    z-index: 1;
+}
+
+
+/* Main Component */
+.mealPlan {
+    margin-top: 20px;
+}
+
+.textRight {
+    margin-left: auto;
+}
+
+.topBar {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.topBar > img {
+    margin-right: 15px;
+}
+
+.mealSwipes {
+    margin-top: 20px;
+}

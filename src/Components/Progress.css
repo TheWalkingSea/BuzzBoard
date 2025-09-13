@@ -2,10 +2,6 @@
     --percentage-semester-progress: 0.6;
 }
 
-.progress {
-    grid-column: 1 / 6;
-}
-
 .progress-circle {
     display: flex;
     align-items: center;
