@@ -31,7 +31,7 @@ export default function Schedule() {
     ]
 
     return (
-        <section>
+        <section className="scheduleContainer">
             <div className="containerHeading">
                 <img src="images/calendar-regular-full.svg" alt="Calendar" width="40"/>
                 <h2 className="heading">Today's Schedule</h2>
