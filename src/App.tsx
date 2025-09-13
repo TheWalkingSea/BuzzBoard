@@ -4,6 +4,7 @@ import QuoteOfTheDay from './Components/QuoteOfTheDay'
 import Clock from './Components/Clock'
 import Progress from './Components/Progress'
 import Assignments from './Components/Assignments'
+import MealPlan from './Components/MealPlan'
 
 function App() {
 
@@ -23,7 +24,10 @@ function App() {
       <QuoteOfTheDay quote="There is no passion to be found playing small - in settling for a life that is less than the one you are capable of living.\n- Nelson Mandela"/>
       <Clock />
 
-      <Progress />
+      <div>
+        <Progress />
+        <MealPlan />
+      </div>
 
       <Assignments />
 
