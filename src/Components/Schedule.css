@@ -1,0 +1,42 @@
+section {
+    grid-column: 1 / 8;
+}
+
+.eventsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.event {
+    background-color: #39465B;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 15px;
+}
+
+.eventInformation {
+    display: flex;
+    flex-direction: column;
+}
+
+.timeContainer {
+    width: 50px;
+    margin-right: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: left;
+}
+
+time {
+    text-align: center;
+}
+
+time > b {
+    font-size: 1.1rem;
+}
+
+.eventInformation > div:first-child {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
