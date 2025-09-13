@@ -1,3 +1,4 @@
+import { get_relative_timestamp } from '../utils/Dates';
 import './Assignments.css';
 
 
@@ -38,8 +39,8 @@ export default function Assignments() {
                     {assignments.map((assignment) => (
                         <div className="assignment" key={assignment.name}>
                             <div className="name">{assignment.name}</div>
-                            <div>{assignment.course}</div>
-                            <div>{assignment.due}</div>
+                            <div className='descriptionColor'>{assignment.course}</div>
+                            <div className='descriptionColor'>{get_relative_timestamp(assignment.due)}</div>
                         </div>
                     ))}
                 </div>

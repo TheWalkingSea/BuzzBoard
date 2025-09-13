@@ -19,3 +19,7 @@
 .name {
     font-weight: bold;
 }
+
+.descriptionColor {
+    color: rgba(255, 255, 255, 0.6);
+}
