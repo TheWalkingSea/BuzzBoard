@@ -10,7 +10,7 @@ export default function Clock() {
                 setTime(new Date());
             }, 1000);
             return () => clearTimeout(timeout);
-        }
+        }, [time]
     );
 
     function padTime(time: number): string {
