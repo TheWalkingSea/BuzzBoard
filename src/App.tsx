@@ -1,8 +1,8 @@
 import './App.css'
-import Weather from './Weather'
-import QuoteOfTheDay from './QuoteOfTheDay'
-import Clock from './Clock'
-import Progress from './Progress'
+import Weather from './Components/Weather'
+import QuoteOfTheDay from './Components/QuoteOfTheDay'
+import Clock from './Components/Clock'
+import Progress from './Components/Progress'
 
 function App() {
 
