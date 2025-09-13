@@ -7,6 +7,7 @@ import Assignments from './Components/Assignments'
 import MealPlan from './Components/MealPlan'
 import Schedule from './Components/Schedule'
 import Notifications from './Components/Notifications'
+import ServerStatus from './Components/ServerStatus'
 
 function App() {
 
