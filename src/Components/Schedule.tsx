@@ -41,8 +41,8 @@ export default function Schedule() {
                 {events.map((event) => {
                     const dt = new Date(event.time);
                     const time = `${dt.getHours() % 12}:${dt.getMinutes().toString().padStart(2, '0')}`;
-                    const meridiem = dt.getHours() > 12 ? 'PM' : 'AM';
-                    return <div className="event">
+                    const meridiem = dt.getHours() >= 12 ? 'PM' : 'AM';
+                    return <div className="event" key={event.name}>
                         <div className="timeContainer">
                             <time dateTime={`${time} ${meridiem}`}>
                                 <b>{time}</b> 
