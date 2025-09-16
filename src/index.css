@@ -22,7 +22,9 @@
   gap: 20px;
   padding: 20px;
 
-  grid-auto-rows: min-content;
+  /* Allows the 3rd row to expand as needed */
+  grid-template-rows: min-content min-content min-content 1fr min-content;
+
 }
 
 section {
@@ -39,7 +41,7 @@ section {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .centered {

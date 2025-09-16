@@ -10,8 +10,8 @@
 .event {
     background-color: #39465B;
     border-radius: 5px;
-    margin: 10px;
-    padding: 15px;
+    margin: 10px 0;
+    padding: 12px;
 }
 
 .eventInformation {
@@ -37,6 +37,9 @@ time > b {
 }
 
 .eventInformation > div:first-child {
-    font-size: 1.1rem;
     font-weight: bold;
+}
+.eventInformation :nth-child(2) {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.95rem
 }

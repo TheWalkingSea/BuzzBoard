@@ -9,7 +9,9 @@ type serverItem = {
 
 export default function ServerStatus() {
 
-    const serverStatus: serverItem[] = [
+    const serverStatus: Status = "offline";
+
+    const statuses: serverItem[] = [
         {
             name: "Smile dsdadaProjss",
             status: 'offline'
@@ -45,10 +47,11 @@ export default function ServerStatus() {
             <div className="containerHeading">
                 <img src="images/server-solid-full.svg" alt="Server icon" width="40"/>
                 <h2 className="heading">Server Status</h2>
+                <span className={`statusIcon ${serverStatus}`}></span>
             </div>
 
             <div className="statusContainer">
-                {serverStatus.map((item) => (
+                {statuses.map((item) => (
                     <div className="statusItem">
                         <div className={`statusIcon ${item.status}`}></div>
                         <span>{item.name}</span>

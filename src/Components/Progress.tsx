@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './Progress.css'
 import * as dates from '../utils/Dates.ts';
 
@@ -6,6 +6,8 @@ export default function Progress () {
 
     const [percentage, setPercentage] = useState(dates.get_percentage);
     const [daysRemain, setDaysRemain] = useState(dates.get_days_remaining);
+
+    const circleRef = useRef<SVGCircleElement | null>(null);
 
     useEffect(() => {
         const next_percent_update: number = dates.get_ms_next_percent();
@@ -24,11 +26,19 @@ export default function Progress () {
             const current_percentage = dates.get_percentage();
             timeout = setTimeout(() => {
                 setPercentage(current_percentage + 0.01);
+                (circleRef.current as SVGCircleElement).style.setProperty('--percentage-semester-progress', (current_percentage + 0.01).toString());
             }, next_percent_update);
         }
 
         return () => clearTimeout(timeout);
     }, [percentage, daysRemain]);
+
+    useEffect(() => {
+        if (circleRef.current) {
+            const current_percentage = dates.get_percentage();
+            (circleRef.current as SVGCircleElement).style.setProperty('--percentage-semester-progress', (current_percentage + 0.01).toString());
+        }
+    }, []);
 
     return (
         <>
@@ -56,7 +66,7 @@ export default function Progress () {
                             <stop offset="100%" stopColor="#38d0ebff" />
                         </linearGradient>
                     </defs>
-                    <circle cx="100" cy="100" r="88" />
+                    <circle cx="100" cy="100" r="88" ref={circleRef}/>
                 </svg>
             </div>
 
