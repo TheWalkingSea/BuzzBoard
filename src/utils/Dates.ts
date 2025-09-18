@@ -31,7 +31,7 @@ export function get_percentage(): number {
     return (Date.now() - SEMESTER_START) / (SEMESTER_LENGTH)
 }
 
-export function get_relative_timestamp(timestamp: number): string {
+export function  get_relative_timestamp(timestamp: number): string {
     return get_relative_date(new Date(timestamp));
 }
 

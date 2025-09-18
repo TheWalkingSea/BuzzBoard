@@ -16,12 +16,12 @@ export default function Clock() {
     function padTime(time: number): string {
         return time.toString().padStart(2, '0');
     }
-
+    
     return (
         <div className="clock">
             <div className="leftBlock block">
                 <div className="centered">
-                    <div className="hour large">{padTime(time.getHours() % 12)}</div>
+                    <div className="hour large">{padTime((time.getHours() - 1) % 12 + 1)}</div>
                 </div>
                 <div className="meridiem small">{time.getHours() >= 12 ? 'pm' : 'am'}</div>
             </div>
