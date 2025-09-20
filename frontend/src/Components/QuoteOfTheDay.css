@@ -4,5 +4,9 @@
 }
 
 .qotd {
-    font-size: 22px;
+    font-size: 25px;
+}
+
+.quoteText {
+    font-weight: 500;
 }

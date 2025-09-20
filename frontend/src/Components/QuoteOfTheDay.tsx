@@ -1,34 +1,34 @@
 import './QuoteOfTheDay.css'
-import { get_ms_until_midnight } from '../utils/Dates.ts';
-import { useState, useEffect } from 'react';
+import { useTimer } from '../utils/Hooks.ts';
+import ServerContext from '../utils/ServerContext';
+import { useContext } from 'react';
 
+type QOTD = {
+    quote: string,
+    author: string
+}
 
-
-function getQuote(): Promise<string> {
-    return fetch('https://zenquotes.io/api/today')
+function fetchQuote(serverURI: string): Promise<QOTD> {
+    return fetch(serverURI + '/getQOTD')
     .then((response) => response.json())
-    .then((response) => `${response[0].q} \n ${response[0].a}`)
+    .then((response) => {
+        if (response['quote'] == 'Too many requests. Obtain an auth key for unlimited access.') {
+            return new Promise<QOTD>((resolve) => {
+                setTimeout((() => {
+                    fetchQuote(serverURI).then(resolve);
+                }), 10000)
+            })
+        }
+
+        return response;
+    });
 }
 
 export default function QuoteOfTheDay() {
-    const [quote, setQuote] = useState("Loading quote...");
+    const serverURI = useContext(ServerContext);
+    const { quote, author } = useTimer({ quote: "Loading quote...", author: ""}, () => fetchQuote(serverURI))
 
-    getQuote().then((q) => console.log(q));
-
-    useEffect(() => {
-        getQuote().then(q => setQuote(q));
-    }, []);
-
-    useEffect(() => {
-        const ms_until_midnight: number = get_ms_until_midnight();
-
-        const timeout = setTimeout(() => {
-            getQuote().then(q => setQuote(q));
-        }, ms_until_midnight);
-        
-        return () => clearTimeout(timeout);
-    }, [quote])
-
+    // const { quote, author } = {"quote":"It isn't what you have or who you are or where you are or what you are doing that makes you happy or unhappy. It is what you think about it.","author":"Dale Carnegie"} 
     return (
         <section className="quote">
             <div className="containerHeading">
@@ -36,7 +36,11 @@ export default function QuoteOfTheDay() {
                 <p className="heading">Quote of the Day</p>
 
             </div>
-            <p className="qotd">{quote}</p>
+            <p className="qotd">
+                <span className="quoteText">{quote}</span>
+                <br />
+                - <i>{author}</i>
+            </p>
         </section>
     )
 }
