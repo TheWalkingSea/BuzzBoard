@@ -15,11 +15,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RestController
 public class QOTDController {
 
-	final private HttpClient client = HttpClient.newHttpClient();
+	final static private HttpClient client = HttpClient.newHttpClient();
+	final static private String QOTD_URI = "https://zenquotes.io/api/today";
 
     @GetMapping("/getQOTD")
 	public QOTD getQuoteOfTheDay() throws Exception {
-		final String QOTD_URI = "https://zenquotes.io/api/today";
 		HttpRequest request = HttpRequest.newBuilder(URI.create(QOTD_URI))
 			.timeout(Duration.ofSeconds(10))
 			.GET()
@@ -29,7 +29,6 @@ public class QOTDController {
 		ObjectMapper mapper = new ObjectMapper();
 		JsonNode json = mapper.readTree(response.body());
 
-		System.out.println("Raw JSON: " + json.toPrettyString());
 		return new QOTD(json.get(0).get("q").asText(), json.get(0).get("a").asText());
 	}
 
