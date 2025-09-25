@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "canvas.token",
+  "type": "java.lang.String",
+  "description": "The Canvas login token to access assignments."
+}]}
