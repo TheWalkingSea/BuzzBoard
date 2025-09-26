@@ -22,3 +22,24 @@ export function useTimer<T>(initial_state: T, getter: () => Promise<T>): T {
 
     return state;
 }
+
+
+export function useTimerSync<T>(initial_state: T, getter: () => T): T {
+    const [state, setState] = useState(initial_state);
+    const getterRef = useRef(getter);
+
+    useEffect(() => {
+        setState(getterRef.current());
+    }, []);
+
+    useEffect(() => {
+
+        const timeout = setTimeout(() => {
+            setState(getterRef.current());
+        }, 100 * 1000);
+        
+        return () => clearTimeout(timeout);
+    }, [state])
+
+    return state;
+}

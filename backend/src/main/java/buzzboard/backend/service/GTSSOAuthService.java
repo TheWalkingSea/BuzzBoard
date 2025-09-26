@@ -97,12 +97,7 @@ public class GTSSOAuthService {
                 "&RelayState=" + encodedRelayState;
     }
 
-    /**
-     * The SAML Handshake allows us to get an authentication token from CAS
-     * to the BUZZCARDURI website
-     */
     private void SAMLHandshake() throws Exception {
-        
         // First request in handshake 
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(BUZZCARDURI))
@@ -111,7 +106,16 @@ public class GTSSOAuthService {
         
         HttpResponse<String> htmlResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        SAMLToken samlRequest = extractSAMLTokens(htmlResponse.body(), "SAMLRequest");
+        SAMLHandshake(htmlResponse.body());
+    }
+
+    /**
+     * The SAML Handshake allows us to get an authentication token from CAS
+     * to the BUZZCARDURI website
+     */
+    private void SAMLHandshake(String html) throws Exception {
+
+        SAMLToken samlRequest = extractSAMLTokens(html, "SAMLRequest");
 
         // Sending SAML Request to server
         final String data = convertSAMLFormData(samlRequest, "SAMLRequest");
@@ -184,7 +188,7 @@ public class GTSSOAuthService {
             .build();
 
         HttpResponse<String> htmlResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
-        
+
         // Extracting data
         Pattern viewstategenPattern = Pattern.compile("id=\"__VIEWSTATEGENERATOR\" value=\"(.+?)\" \\/>");
         Matcher viewstategenMatcher = viewstategenPattern.matcher(htmlResponse.body());
@@ -227,8 +231,13 @@ public class GTSSOAuthService {
             initializeViewState();
             return getDiningInformation();
         }
-
-        return parseDiningInformation(htmlResponse.body());
+        try {
+            return parseDiningInformation(htmlResponse.body());
+        } catch (NoSuchElementException e) {
+            System.out.println("Could not find dining information. Completing SSO Handshake: " + htmlResponse.body());
+            SAMLHandshake(htmlResponse.body());
+            return getDiningInformation();
+        }
     }
 
     public record DiningInformation(Double diningDollars, Integer mealSwipes) {}
