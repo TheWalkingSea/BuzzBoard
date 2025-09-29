@@ -24,6 +24,9 @@
 .relativePercentage {
     z-index: 2;
     position: relative;
+    --relativePercentage: 100%;
+    width: var(calc(var(--relativePercentage) * var(--absPercentage)));
+    left: calc(var(--absPercentage) - var(--relativePercentage));
 }
 
 

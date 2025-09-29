@@ -127,10 +127,18 @@ public class GTSSOAuthService {
             .build();
 
         HttpResponse<String> samlResponse = client.send(samlIDPRequest, HttpResponse.BodyHandlers.ofString());
-        
+
+        final String data_auth;
         // Second request in handshake (The auth handshake)
-        SAMLToken samlRequest_auth = extractSAMLTokens(samlResponse.body(), "SAMLResponse");
-        final String data_auth = convertSAMLFormData(samlRequest_auth, "SAMLResponse");
+        try {
+            SAMLToken samlRequest_auth = extractSAMLTokens(samlResponse.body(), "SAMLResponse");
+            data_auth = convertSAMLFormData(samlRequest_auth, "SAMLResponse");
+        } catch (java.util.NoSuchElementException e) {
+            System.out.println("Could not find SAMLResponse Token. Reloading client...");
+            SSOAuthenticate();
+            initializeViewState();
+            return;
+        }
 
         HttpRequest samlAuthRequest = HttpRequest.newBuilder()
             .uri(URI.create(SAMLAUTHURI))
@@ -216,7 +224,7 @@ public class GTSSOAuthService {
                     "&__EVENTVALIDATION=" + eventValidationVar;
     }
 
-    public DiningInformation getDiningInformation () throws Exception {
+    public DiningInformation getDiningInformation (boolean retry) throws Exception {
 
         HttpRequest request = HttpRequest.newBuilder()
             .uri(URI.create(BUZZCARDURI))
@@ -236,8 +244,12 @@ public class GTSSOAuthService {
         } catch (NoSuchElementException e) {
             System.out.println("Could not find dining information. Completing SSO Handshake: " + htmlResponse.body());
             SAMLHandshake(htmlResponse.body());
-            return getDiningInformation();
+            return getDiningInformation(true);
         }
+    }
+
+    public DiningInformation getDiningInformation () throws Exception {
+        return getDiningInformation(false);
     }
 
     public record DiningInformation(Double diningDollars, Integer mealSwipes) {}
