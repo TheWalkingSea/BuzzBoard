@@ -44,7 +44,6 @@ function calculateDaysPassed() {
     let days_passed = (current.getTime() - FIRST_DAY_OF_SCHOOL.getTime()) / (1000 * 60 * 60 * 24);
     for (const day of DAYS_OUT) {
         if (day <= current) {
-            console.log(day);
             days_passed--;
         } else {
             break;
@@ -96,9 +95,9 @@ export default function MealPlan() {
     const diningData = useTimer({
         diningDollars: -1,
         mealSwipes: -1
-    }, () => fetchDiningData(serverURI));
+    }, () => fetchDiningData(serverURI), 100*1000);
 
-    const days_passed = useTimerSync(-1, calculateDaysPassed);
+    const days_passed = useTimerSync(-1, calculateDaysPassed, 120*1000);
 
 
     const relativeSwipes = (200 - diningData.mealSwipes) - (days_passed * (200 / TOTAL_DAYS));

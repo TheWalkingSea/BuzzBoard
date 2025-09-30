@@ -31,7 +31,7 @@ export function get_percentage(): number {
     return (Date.now() - SEMESTER_START) / (SEMESTER_LENGTH)
 }
 
-export function  get_relative_timestamp(timestamp: number): string {
+export function get_relative_timestamp(timestamp: number): string {
     return get_relative_date(new Date(timestamp));
 }
 
@@ -43,17 +43,31 @@ export function get_relative_date(date: Date): string {
     const delta_d = now.getDate() - date.getDate();
     const delta_h = now.getHours() - date.getHours();
     const delta_s = now.getSeconds() - date.getSeconds();
-    if (delta_y > 0) {
-        return `${delta_y} year${delta_y > 1 && 's'} ago`
-    } else if (delta_m > 0) {
-        return `${delta_m} month${delta_m > 1 && 's'} ago`
-    } else if (delta_d > 0) {
-        return `${delta_d} day${delta_d > 1 && 's'} ago`
-    } else if (delta_h > 0) {
-        return `${delta_h} hour${delta_h > 1 && 's'} ago`
-    } else if (delta_s >= 0) {
-        return `${delta_s} second${delta_s > 1 && 's'} ago`
+
+    const isFuture = date.getTime() > now.getTime();
+
+    let ret = "";
+
+    if (delta_y !== 0) {
+        const value = Math.abs(delta_y);
+        ret = `${value} year${value !== 1 ? 's' : ''}`;
+    } else if (delta_m !== 0) {
+        const value = Math.abs(delta_m);
+        ret = `${value} month${value !== 1 ? 's' : ''}`;
+    } else if (delta_d !== 0) {
+        const value = Math.abs(delta_d);
+        ret = `${value} day${value !== 1 ? 's' : ''}`;
+    } else if (delta_h !== 0) {
+        const value = Math.abs(delta_h);
+        ret = `${value} hour${value !== 1 ? 's' : ''}`;
+    } else if (delta_s !== 0) {
+        const value = Math.abs(delta_s);
+        ret = `${value} second${value !== 1 ? 's' : ''}`;
     }
 
-    return 'Invalid Timestamp';
+    if (isFuture) {
+        return "In " + ret;
+    } else {
+        return ret + " ago";
+    }
 }

@@ -2,7 +2,27 @@ import { useEffect, useState, useRef } from "react";
 import { get_ms_until_midnight } from "./Dates";
 
 
-export function useTimer<T>(initial_state: T, getter: () => Promise<T>): T {
+export function useTimer<T>(initial_state: T, getter: () => Promise<T>, timeout: number): T {
+    const [state, setState] = useState(initial_state);
+    const getterRef = useRef(getter);
+
+    useEffect(() => {
+        getterRef.current().then(q => setState(q));
+    }, []);
+
+    useEffect(() => {
+
+        const timeoutId = setTimeout(() => {
+            getterRef.current().then(q => setState(q));
+        }, timeout);
+        
+        return () => clearTimeout(timeoutId);
+    }, [state, timeout])
+
+    return state;
+}
+
+export function useDailyResetState<T>(initial_state: T, getter: () => Promise<T>): T {
     const [state, setState] = useState(initial_state);
     const getterRef = useRef(getter);
 
@@ -24,7 +44,7 @@ export function useTimer<T>(initial_state: T, getter: () => Promise<T>): T {
 }
 
 
-export function useTimerSync<T>(initial_state: T, getter: () => T): T {
+export function useTimerSync<T>(initial_state: T, getter: () => T, timeout: number): T {
     const [state, setState] = useState(initial_state);
     const getterRef = useRef(getter);
 
@@ -34,12 +54,12 @@ export function useTimerSync<T>(initial_state: T, getter: () => T): T {
 
     useEffect(() => {
 
-        const timeout = setTimeout(() => {
+        const timeoutId = setTimeout(() => {
             setState(getterRef.current());
-        }, 100 * 1000);
+        }, timeout);
         
-        return () => clearTimeout(timeout);
-    }, [state])
+        return () => clearTimeout(timeoutId);
+    }, [state, timeout])
 
     return state;
 }
