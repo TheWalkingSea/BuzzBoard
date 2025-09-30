@@ -1,28 +1,27 @@
 package buzzboard.backend.controller;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import java.util.ArrayList;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import buzzboard.backend.service.GTSSOAuthService;
+import buzzboard.backend.service.CanvasLMS;
+import buzzboard.backend.service.CanvasLMS.Assignment;
+
 
 @RestController
 public class AssignmentsController {
 
-    public final GTSSOAuthService authService;
+    public final CanvasLMS canvasService;
 
-    AssignmentsController(GTSSOAuthService authService) {
-        this.authService = authService;
+    public AssignmentsController(CanvasLMS canvasService) {
+        this.canvasService = canvasService;
     }
 
-    @GetMapping("/mealplan")
-    ResponseEntity<GTSSOAuthService.DiningInformation> getMealPlan() {
-        try {
-            return ResponseEntity.ok(authService.getDiningInformation());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+
+    @GetMapping("/getAssignments")
+    public ArrayList<Assignment> getAssignments() throws Exception {
+        return canvasService.getCanvasToDo();
     }
+    
 }

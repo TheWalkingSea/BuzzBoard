@@ -1,5 +1,7 @@
 package buzzboard.backend.service;
 
+import java.net.CookieManager;
+import java.net.CookiePolicy;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
@@ -18,7 +20,7 @@ import jakarta.annotation.PostConstruct;
 @Service
 public class GTSSOAuthService {
 
-    private final HttpClient client;
+    private HttpClient client;
 
     final static String GTSSOURI = "https://sso.gatech.edu/cas/login";
     final static String BUZZCARDURI = "https://eAcct-buzzcard-sp.transactcampus.com/buzzcard/AccountSummary.aspx";
@@ -135,6 +137,13 @@ public class GTSSOAuthService {
             data_auth = convertSAMLFormData(samlRequest_auth, "SAMLResponse");
         } catch (java.util.NoSuchElementException e) {
             System.out.println("Could not find SAMLResponse Token. Reloading client...");
+            CookieManager cookieManager = new CookieManager();
+            cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
+
+            client = HttpClient.newBuilder()
+                .followRedirects(HttpClient.Redirect.ALWAYS)
+                .cookieHandler(cookieManager)
+                .build();
             SSOAuthenticate();
             initializeViewState();
             return;
