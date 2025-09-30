@@ -1,5 +1,7 @@
 .assignments {
     grid-column: 6 / -1;
+    height: 582px;
+    overflow: hidden;
 }
 
 .assignmentContainer {

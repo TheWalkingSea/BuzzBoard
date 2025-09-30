@@ -34,6 +34,8 @@ export default function Assignments() {
 
     const assignments = useTimer([], () => fetchAssignmentData(serverURI), 5*120);
 
+    const sortedAssignments = [...assignments].sort((a, b) => a.due_at - b.due_at);
+
     return (
         <section className="assignments">
             <div className="containerHeading">
@@ -41,11 +43,13 @@ export default function Assignments() {
                 <h2 className="heading">Assignments</h2>
             </div>
                 <div className="assignmentContainer">
-                    {assignments.map((assignment) => (
-                        <div className="assignment" key={assignment.name}>
+                    {sortedAssignments.map((assignment) => (
+                        <div className="assignment" key={assignment.name + assignment.course_name}>
                             <div className="name">{assignment.name}</div>
                             <div className='descriptionColor'>{assignment.course_name}</div>
-                            <div className='descriptionColor'>{get_relative_timestamp(assignment.due_at * 1000)}</div>
+                            <div className='descriptionColor' style={{
+                                color: assignment.due_at * 1000 > new Date().getTime() ? "inherit" : "red"
+                            }}>{get_relative_timestamp(assignment.due_at * 1000)}</div>
                         </div>
                     ))}
                 </div>
