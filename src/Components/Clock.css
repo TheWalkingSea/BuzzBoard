@@ -1,0 +1,45 @@
+:root {
+    --small-spacing: 15px;
+}
+
+.large {
+    font-size: 64px;
+    font-weight: bold;
+}
+
+.block {
+    position: relative;
+}
+
+.small {
+    font-size: 16px;
+    text-transform: uppercase;
+
+    position: absolute;
+    bottom: var(--small-spacing);
+}
+
+.seconds {
+    right: var(--small-spacing);
+}
+
+.clock {
+    display: flex;
+    justify-content: center;
+    grid-column: 9 / -1;
+    width: 100%;
+    align-items: center;
+}
+
+.clock > div.block {
+    height: 146px;
+    border-radius: 15px;
+    background-color: #143156;
+    flex: 1;
+    padding: var(--small-spacing);
+}
+
+
+.block {
+    margin: 15px;
+}

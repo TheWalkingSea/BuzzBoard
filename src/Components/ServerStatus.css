@@ -1,0 +1,41 @@
+.serverStatus {
+    grid-column: 1 / -1;
+}
+
+.statusIcon {
+    border-radius: 50%;
+    height: 23px;
+    width: 23px;
+
+    margin-right: 10px;
+
+    flex-shrink: 0;
+}
+
+.offline{
+    background-color: #6B7280;
+}
+
+.online {
+    background-color: #34C759;
+}
+
+.error {
+    background-color: #FF383C;
+}
+
+.statusContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 20px 10px;
+
+    margin: 10px 0px;
+
+}
+
+.statusItem {
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    word-break: break-word;
+}

@@ -1,0 +1,8 @@
+.quote {
+    grid-column: 1 / 9;
+    height: 211px;
+}
+
+.qotd {
+    font-size: 22px;
+}
