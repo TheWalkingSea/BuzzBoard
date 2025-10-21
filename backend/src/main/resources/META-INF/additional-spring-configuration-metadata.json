@@ -1,5 +1,12 @@
-{"properties": [{
-  "name": "canvas.token",
-  "type": "java.lang.String",
-  "description": "The Canvas login token to access assignments."
-}]}
+{"properties": [
+  {
+    "name": "canvas.token",
+    "type": "java.lang.String",
+    "description": "The Canvas login token to access assignments."
+  },
+  {
+    "name": "emails",
+    "type": "java.lang.String",
+    "description": "Configuration for each email inbox to be recorded in notifications"
+  }
+]}

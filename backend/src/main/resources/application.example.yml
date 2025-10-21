@@ -1,0 +1,16 @@
+emails:
+  - name: personal_gmail
+    host: imap.gmail.com
+    port: 993
+    useSSL: true
+    username: "alice@gmail.com"
+    password: "APP_PASSWORD"
+    mailbox: "INBOX"
+
+  - name: work
+    host: mail.example.com
+    port: 993
+    useSSL: true
+    username: "bob@example.com"
+    password: "s3cret"
+    mailbox: "INBOX"
