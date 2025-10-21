@@ -37,37 +37,33 @@ export function get_relative_timestamp(timestamp: number): string {
 
 export function get_relative_date(date: Date): string {
     const now = new Date();
+    const diffMs = date.getTime() - now.getTime();
+    const isFuture = diffMs > 0;
 
-    const delta_y = now.getFullYear() - date.getFullYear();
-    const delta_m = now.getMonth() - date.getMonth();
-    const delta_d = now.getDate() - date.getDate();
-    const delta_h = now.getHours() - date.getHours();
-    const delta_s = now.getSeconds() - date.getSeconds();
+    const diff = Math.abs(diffMs);
 
-    const isFuture = date.getTime() > now.getTime();
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+    const months = Math.floor(days / 30);  // rough approximation
+    const years = Math.floor(months / 12);
 
     let ret = "";
 
-    if (delta_y !== 0) {
-        const value = Math.abs(delta_y);
-        ret = `${value} year${value !== 1 ? 's' : ''}`;
-    } else if (delta_m !== 0) {
-        const value = Math.abs(delta_m);
-        ret = `${value} month${value !== 1 ? 's' : ''}`;
-    } else if (delta_d !== 0) {
-        const value = Math.abs(delta_d);
-        ret = `${value} day${value !== 1 ? 's' : ''}`;
-    } else if (delta_h !== 0) {
-        const value = Math.abs(delta_h);
-        ret = `${value} hour${value !== 1 ? 's' : ''}`;
-    } else if (delta_s !== 0) {
-        const value = Math.abs(delta_s);
-        ret = `${value} second${value !== 1 ? 's' : ''}`;
+    if (years > 0) {
+        ret = `${years} year${years !== 1 ? "s" : ""}`;
+    } else if (months > 0) {
+        ret = `${months} month${months !== 1 ? "s" : ""}`;
+    } else if (days > 0) {
+        ret = `${days} day${days !== 1 ? "s" : ""}`;
+    } else if (hours > 0) {
+        ret = `${hours} hour${hours !== 1 ? "s" : ""}`;
+    } else if (minutes > 0) {
+        ret = `${minutes} minute${minutes !== 1 ? "s" : ""}`;
+    } else {
+        ret = `${seconds} second${seconds !== 1 ? "s" : ""}`;
     }
 
-    if (isFuture) {
-        return "In " + ret;
-    } else {
-        return ret + " ago";
-    }
+    return isFuture ? `In ${ret}` : `${ret} ago`;
 }

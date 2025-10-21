@@ -32,9 +32,9 @@ export default function Assignments() {
 
     const serverURI = useContext(ServerContext);
 
-    const assignments = useTimer([], () => fetchAssignmentData(serverURI), 5*120);
+    const assignments = useTimer([], () => fetchAssignmentData(serverURI), 5*1000);
 
-    const sortedAssignments = [...assignments].sort((a, b) => a.due_at - b.due_at);
+    const sortedAssignments = [...assignments].sort((a, b) => (a.due_at + a.name.length) - (b.due_at + b.name.length));
 
     return (
         <section className="assignments">

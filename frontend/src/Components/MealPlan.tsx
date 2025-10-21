@@ -114,7 +114,7 @@ export default function MealPlan() {
                 <div className="topBar">
                     <img src="images/credit-card-solid-full.svg" alt="Credit Card" width="36" />
                     <span>Dining Dollars</span>
-                    <span className="textRight">${Math.floor(100 * relativeDiningDollars) / 100}</span>
+                    <span className="textRight">${(relativeDiningDollars).toFixed(2)}</span>
                 </div>
                 {/* $788 dining dollars in a flex package */}
                 <ProgressBar percentage={100 * ( 1 - diningData.diningDollars / 788)} relativePercentage={100 * relativeDiningDollars / 788} />
