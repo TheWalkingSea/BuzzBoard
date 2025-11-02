@@ -1,4 +1,4 @@
-package buzzboard.backend;
+package buzzboard.backend.config;
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;

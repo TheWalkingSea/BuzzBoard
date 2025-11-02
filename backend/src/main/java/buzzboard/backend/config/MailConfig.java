@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "emails")
+@ConfigurationProperties(prefix = "mail")
 public class MailConfig {
 
     private List<EmailConfig> emails = new ArrayList<>();
